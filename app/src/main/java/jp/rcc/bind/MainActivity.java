@@ -18,6 +18,7 @@ import java.util.Random;
 import static java.lang.System.exit;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String appKey = "12345678901";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
