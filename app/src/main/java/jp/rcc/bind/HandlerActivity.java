@@ -10,4 +10,12 @@ public class HandlerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_handler);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+
+    }
 }
