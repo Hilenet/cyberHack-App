@@ -1,7 +1,9 @@
 package jp.rcc.bind;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +11,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,11 +38,13 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+import static java.lang.System.exit;
 import static jp.rcc.bind.MainActivity.appKey;
 
 public class HandlerActivity extends AppCompatActivity {
     public static String service;
     public static String username;
+    public static LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +62,7 @@ public class HandlerActivity extends AppCompatActivity {
         ArrayList<String> users = getUsers(service);
 
         // gen button
-        LinearLayout layout = (LinearLayout)findViewById(R.id.linear);
+        layout = (LinearLayout)findViewById(R.id.linear);
         ArrayList<Button> buttons = new ArrayList<Button>();
         for(final String user : users) {
             username = user;
@@ -68,6 +74,16 @@ public class HandlerActivity extends AppCompatActivity {
                 public void onClick (View v) {
                     //post
                     taskExe();
+
+                    // kill layout
+                    HandlerActivity.layout.removeAllViews();
+
+                    // this should replace to: listen handler callback
+                    ImageView complete = new ImageView(getApplicationContext());
+                    complete.setImageResource(R.drawable.lgtm);
+
+                    HandlerActivity.layout.addView(complete);
+
                 }
 
             });
@@ -83,11 +99,12 @@ public class HandlerActivity extends AppCompatActivity {
                 //proc
                 String urlStr = "http://ec2-52-69-154-35.ap-northeast-1.compute.amazonaws.com/";
                 String json = "{" +
-                        "\"key\":" + appKey +
-                        ", \"service\": " + HandlerActivity.service +
-                        ", \"user_name\": " + HandlerActivity.username +
-                        "}";
+                        "\"key\":\"" + appKey +
+                        "\", \"service\":\"" + HandlerActivity.service +
+                        "\", \"user\":\"" + HandlerActivity.username +
+                        "\"}";
 
+                String token="";
 
                 try {
                     String buffer = "";
@@ -106,7 +123,8 @@ public class HandlerActivity extends AppCompatActivity {
                             new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
                     buffer = reader.readLine();
 
-                    Log.d("debug", buffer);
+                    token = buffer;
+                    Log.d("debug", "token: "+token);
 
                     con.disconnect();
                 } catch (MalformedURLException e) {
@@ -120,9 +138,64 @@ public class HandlerActivity extends AppCompatActivity {
                 }
 
 
+                try {
+                    JSONObject jenkins = new JSONObject(token);
+                    token = jenkins.getString("token");
+
+                } catch (JSONException e) {}
+
+                Log.d("debug", token);
+                token = "token1";
+
+                // post token to service
+                urlStr = "http://"+HandlerActivity.service+"/auth/client";
+                json = "{" +
+                        "\"token\":\"" + token + "\"}";
+
+                try {
+                    String buffer = "";
+                    HttpURLConnection con = null;
+                    URL url = new URL(urlStr);
+                    con = (HttpURLConnection) url.openConnection();
+                    con.setRequestMethod("POST");
+                    con.setDoOutput(true);
+                    con.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+                    OutputStream os = con.getOutputStream();
+                    PrintStream ps = new PrintStream(os);
+                    ps.print(json);
+                    ps.close();
+
+                    BufferedReader reader =
+                            new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
+
+                    buffer = reader.readLine();
+
+                    token = buffer;
+
+                    con.disconnect();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (ProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("debug", token);
+                if(token.contains("true")) {
+                    Uri uri = Uri.parse("http://" + service);
+                    Intent i = new Intent(Intent.ACTION_VIEW,uri);
+                    startActivity(i);
+                } else {
+                    Log.d("debug", "failed");
+                }
+
 
                 return null;
             }
+
         };
 
         task.execute();

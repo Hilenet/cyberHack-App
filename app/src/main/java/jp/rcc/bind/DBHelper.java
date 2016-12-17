@@ -36,8 +36,9 @@ public class DBHelper extends SQLiteOpenHelper {
         sql += ",User_name text";
         sql += ")";
         db.execSQL(sql);
-        db.execSQL("insert into bind (Service_url, User_name) values ('service.tatsu.site', '小林')");
-        db.execSQL("insert into bind (Service_url, User_name) values ('service.tatsu.site', 'tatsuaki86')");
+        db.execSQL("insert into bind (Service_url, User_name) values ('service.tatsu.site', 'kobayashi')");
+        db.execSQL("insert into bind (Service_url, User_name) values ('service.tatsu.site', 'tatsuaki')");
+        db.execSQL("insert into bind (Service_url, User_name) values ('service.tatsu.site', 'user1')");
 
         db.execSQL("insert into bind (Service_url, User_name) values ('nora.world', 'のら')");
         db.execSQL("insert into bind (Service_url, User_name) values ('nora.world', 'horklie')");
