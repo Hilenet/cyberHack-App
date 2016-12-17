@@ -22,15 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView hoge = new TextView(this);
-        hoge.setText("hello world");
-
-        TextView bar = new TextView(this);
-        bar.setText("hedasad");
-
-        LinearLayout ver = (LinearLayout)findViewById(R.id.ver);
-        ver.addView(hoge);
-        ver.addView(bar);
+        LinearLayout t1 = (LinearLayout)findViewById(R.id.t1);
 
     }
 

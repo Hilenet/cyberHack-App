@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Bind.iml" filepath="$PROJECT_DIR$/Bind.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cyberhack-app.iml" filepath="$PROJECT_DIR$/cyberhack-app.iml" />
     </modules>
   </component>
 </project>

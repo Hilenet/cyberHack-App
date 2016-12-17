@@ -3,22 +3,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <TableLayout
+    android:id="@+id/t1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <TableRow
+            android:id="@+id/a1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:layout_width="350sp"
+                android:layout_height="wrap_content"
+                android:textSize="70px"
+                android:text="google"
+                android:background="#04ff00"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/a2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="70px"
+                android:text="Bing"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+        <TableRow
+            android:id="@+id/a3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="70px"
+                android:text="Yahoo!"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+        <TableRow
+            android:id="@+id/a4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <Button
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/numPeople"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
-    </LinearLayout>
+            android:textSize="70px"
+            android:text="Skype"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+
+    </TableLayout>
 
 </LinearLayout>
 
