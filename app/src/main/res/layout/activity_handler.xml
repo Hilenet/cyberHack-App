@@ -18,7 +18,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:gravity="center"
-        android:id="@+id/linear"></LinearLayout>
+        android:id="@+id/linear">
+
+    </LinearLayout>
 
     <TextView
         android:text="TextView"
@@ -26,5 +28,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/logo"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="30sp"
+        android:textStyle="normal|bold|italic" />
 </RelativeLayout>

@@ -37,6 +37,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import static java.lang.System.exit;
 import static jp.rcc.bind.MainActivity.appKey;
@@ -124,7 +125,6 @@ public class HandlerActivity extends AppCompatActivity {
                     buffer = reader.readLine();
 
                     token = buffer;
-                    Log.d("debug", "token: "+token);
 
                     con.disconnect();
                 } catch (MalformedURLException e) {
@@ -145,12 +145,16 @@ public class HandlerActivity extends AppCompatActivity {
                 } catch (JSONException e) {}
 
                 Log.d("debug", token);
-                token = "token1";
+                //token = "token1";
 
                 // post token to service
                 urlStr = "http://"+HandlerActivity.service+"/auth/client";
                 json = "{" +
                         "\"token\":\"" + token + "\"}";
+
+                Log.d("debug", json);
+
+                String res = "";
 
                 try {
                     String buffer = "";
@@ -170,7 +174,7 @@ public class HandlerActivity extends AppCompatActivity {
 
                     buffer = reader.readLine();
 
-                    token = buffer;
+                    res= buffer;
 
                     con.disconnect();
                 } catch (MalformedURLException e) {
@@ -183,9 +187,13 @@ public class HandlerActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                Log.d("debug", token);
-                if(token.contains("true")) {
-                    Uri uri = Uri.parse("http://" + service);
+                Log.d("debug", res);
+
+
+
+                if(res.contains("true")) {
+                    Uri uri = Uri.parse("http://" + service + "/token/"+token);
+                    Log.d("debug", uri.getPath());
                     Intent i = new Intent(Intent.ACTION_VIEW,uri);
                     startActivity(i);
                 } else {
