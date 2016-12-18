@@ -9,5 +9,19 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="jp.rcc.bind.HandlerActivity">
+　
+    <TableLayout
+        android:id="@+id/a"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TableRow
+            android:id="@+id/b"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+        </TableRow>
+    </TableLayout>
 
 </RelativeLayout>

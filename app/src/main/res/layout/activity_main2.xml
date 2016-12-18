@@ -11,7 +11,7 @@
     tools:context=".MainActivity">
 
     <TableLayout
-    android:id="@+id/t1"
+        android:id="@+id/t1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TableRow
@@ -31,5 +31,3 @@
     </TableLayout>
 
 </LinearLayout>
-
-
