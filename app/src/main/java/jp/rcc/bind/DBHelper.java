@@ -1,8 +1,10 @@
+
 package jp.rcc.bind;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 
 /**
  * Created by unkno_000 on 2016/12/17.
